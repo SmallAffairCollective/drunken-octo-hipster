@@ -3,7 +3,10 @@ requirejs.config({
         cs: '../lib/cs',
         'coffee-script': '../lib/coffee-script',
         graphael: '../lib/g.raphael-min',
-        gpie: '../lib/g.pie-min'
+        gpie: '../lib/g.pie-min',
+        gline: '../lib/g.line-min',
+        gdot: '../lib/g.dot-min',
+        gbar: '../lib/g.bar-min'
     },
     shim: {
         'graphael': {
@@ -12,6 +15,18 @@ requirejs.config({
         'gpie': {
             deps: ['graphael'],
             exports: 'GPie'
+        },
+        'gline': {
+            deps: ['graphael'],
+            exports: 'GLine'
+        },
+        'gdot': {
+            deps: ['graphael'],
+            exports: 'GDot'
+        },
+        'gbar': {
+            deps: ['graphael'],
+            exports: 'GBar'
         }
     }
 });
