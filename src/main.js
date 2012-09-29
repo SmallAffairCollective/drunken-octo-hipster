@@ -21,7 +21,6 @@ requirejs(['cs!graphs'],
 function   (Graphs) {
     window.onload = function () {
         function readBlob(opt_startByte, opt_stopByte) {
-
             var files = document.getElementById('files').files;
             if (!files.length) {
               alert('Please select a file!');
@@ -43,7 +42,7 @@ function   (Graphs) {
                      ' of ', file.size, ' byte file'].join('');
                 var data = evt.target.result
                 var lines = data.split("\n");
-                var flag = 0;
+                var flag = 1;
                 var labels = [];
                 var values = [];
                 var title = "";
@@ -122,10 +121,11 @@ function   (Graphs) {
                     }
                   }
                   
-                } 
+                }
                 console.log(labels);
                 console.log(values);
                 console.log(title); 
+                Graphs.piechart(values, labels, title); 
               }
             };
 
@@ -133,6 +133,7 @@ function   (Graphs) {
           }
           
           document.querySelector('.readBytesButtons').addEventListener('click', function(evt) {
+            console.log("test");
             if (evt.target.tagName.toLowerCase() == 'button') {
               var startByte = evt.target.getAttribute('data-startbyte');
               var endByte = evt.target.getAttribute('data-endbyte');
