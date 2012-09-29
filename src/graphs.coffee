@@ -18,7 +18,7 @@ define ['graphael', 'gpie', 'gline', 'gdot', 'gbar'], () ->
         if @label
           @label[0].animate({ r: 5 }, 500, "bounce")
           @label[1].attr({ "font-weight": 400 })
-      ),
+      )
     # values:Array, labels:Array, [title:String]
     linechart: (values, labels, title) ->
       if !@r? then @r = Raphael(10, 50, 640, 480)

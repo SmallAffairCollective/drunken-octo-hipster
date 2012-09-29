@@ -57,7 +57,7 @@ function   (Graphs, parseCSV) {
                      ' of ', file.size, ' byte file'].join('');
                 var data = evt.target.result;
                 var pieData = parseCSV(data);
-                Graphs.piechart(pieData.values, pieData.labels, pieData.title); 
+                Graphs.linechart(pieData.values, pieData.labels, pieData.title); 
               }
             };
 
