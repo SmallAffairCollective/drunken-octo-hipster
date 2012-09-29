@@ -4,7 +4,6 @@
 <head>
 <meta charset="utf-8">
 <title>drunken octo hipster</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <style>.example{padding:10px;border:1px solid #ccc}#drop_zone{border:2px dashed #bbb;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;padding:25px;text-align:center;font:20pt bold,"Vollkorn";color:#bbb}.thumb{height:75px;border:1px solid #000;margin:10px 5px 0 0}#progress_bar{margin:10px 0;padding:3px;border:1px solid #000;font-size:14px;clear:both;opacity:0;-o-transition:opacity 1s linear;-moz-transition:opacity 1s linear;-webkit-transition:opacity 1s linear;-ms-transition:opacity 1s linear}#progress_bar.loading{opacity:1}#progress_bar .percent{background-color:#9cf;height:auto;width:0}#byte_content{margin:5px 0;max-height:100px;overflow-y:auto;overflow-x:hidden}#byte_range{margin-top:5px}</style>
 </head>
 <body>
@@ -49,7 +48,57 @@
         document.getElementById('byte_range').textContent = 
             ['Read bytes: ', start + 1, ' - ', stop + 1,
              ' of ', file.size, ' byte file'].join('');
-        alert(evt.target.result);
+        var data = evt.target.result
+        var lines = data.split("\n");
+        var flag = 0;
+        var labels = [];
+        var values = [];
+        var title = "";
+        var obj = {};
+        for (var line in lines) {
+          if (lines.hasOwnProperty(line)) { 
+            //alert("prop: " + line + " value: " + lines[line])
+            if (line == 0) {
+              var header = lines[line].split(",");
+              title = header[0];
+              // use columns as labels
+              if (flag == 0) {
+                for (i=1; i<header.length; i++) {
+                  labels.push(header[i]);
+                }
+              }
+            }
+            else {
+              if (flag == 1) {
+                // TODO !! fill this in
+              }
+              else {
+                var line_a = lines[line].split(",");
+                obj[line_a[0]] = [];
+                for (i=1; i<line_a.length; i++) {
+                   obj[line_a[0]].push(line_a[i]);
+                }
+              }
+            }
+          }
+        }
+        for (row in obj) {
+          if (obj[row].length != 0) {
+            var sum = 0;
+            for (value in obj[row]) {
+              if (isNaN(parseInt(obj[row][value]))) {
+                // skip, NaN
+              }
+              else {
+                sum += parseInt(obj[row][value]);
+              }
+            }
+            values.push(sum);
+          }
+        }
+        console.log(labels);
+        console.log(values);
+        console.log(title); 
       }
     };
 
